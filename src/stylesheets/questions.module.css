@@ -1,0 +1,37 @@
+.container {
+    width: 80%;
+    margin: 1% auto auto;
+}
+
+.header {
+    background-color: #F49D3B;
+    padding: 1%;
+}
+
+.headerButton {
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+}
+
+.postQuestions {
+    display: flex;
+    justify-content: space-around;
+    padding: 1%;
+    margin-top: 1%;
+    background-color: #F49D3B;
+}
+
+.postQuestionsLeft {
+    width: 90%;
+}
+
+.postQuestionsRight {
+    width: 10%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.questions{
+    padding: 1%;
+}
