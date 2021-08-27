@@ -1,8 +1,12 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import PropTypes from 'prop-types';
 
 class SessionButton extends React.Component {
+    state = {
+        isLoading: false
+    }
+
     render() {
         return (
             <Button
@@ -13,9 +17,18 @@ class SessionButton extends React.Component {
                     ...this.props.style,
                     backgroundColor: this.props.backgroundColor
                 }}
-                onClick={this.props.onClick}
+                onClick={() => {
+                    this.setState({isLoading: true});
+
+                    setTimeout(async () => {
+                        await this.props.onClick();
+                        await this.setState({isLoading: false});
+                    }, 800);
+
+                }}
             >
-                {this.props.title}
+                {this.state.isLoading ? <Spinner animation={"border"} size={"sm"} variant={"dark"}/> :
+                    <span>{this.props.title}</span>}
             </Button>
         )
     }
