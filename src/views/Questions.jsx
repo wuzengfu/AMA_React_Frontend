@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Col, Row } from 'react-bootstrap';
+import { Form, Button, Col, Row, Spinner } from 'react-bootstrap';
 import styles from "../stylesheets/questions.module.css";
 import Question from "../components/Question";
 import axios from 'axios';
@@ -15,7 +15,8 @@ class Questions extends Component {
     state = {
         questions: [],
         user_session: "",
-        question_description: ""
+        question_description: "",
+        isLoading: false
     }
 
     componentDidMount() {
@@ -31,16 +32,22 @@ class Questions extends Component {
     }
 
     handleQuestionPost = () => {
+        this.setState({isLoading: true});
+
         const {question_description, user_session} = this.state;
 
-        axios.post(`${baseURL}/question/postQuestion`, {
-            user_session: user_session,
-            question: question_description
-        }).then((result) => {
-            this.setState({question_description: ""});
-            this.fetchAllQuestions();
-            alert(result.data);
-        }).catch(err => alert(err.response.data));
+        setTimeout(() => {
+            axios.post(`${baseURL}/question/postQuestion`, {
+                user_session: user_session,
+                question: question_description
+            }).then(result => {
+                alert(result.data);
+            }).then(() => {
+                this.fetchAllQuestions();
+                this.setState({question_description: "", isLoading: false});
+            }).catch(err => alert(err.response.data));
+        }, 800);
+
     }
 
     handleQuestionChange = e => {
@@ -74,7 +81,10 @@ class Questions extends Component {
                     </div>
 
                     <div className={styles.postQuestionsRight}>
-                        <Button variant={"success"} className={"w-75"} onClick={this.handleQuestionPost}>Post</Button>
+                        <Button variant={"success"} className={"w-75"}
+                                onClick={this.handleQuestionPost}>{this.state.isLoading ?
+                            <Spinner animation={"border"} size={"sm"} variant={"white"} className={"opacity-75"}/> :
+                            <span>Post</span>}</Button>
                     </div>
                 </div>
 
@@ -82,7 +92,8 @@ class Questions extends Component {
                     {this.state.questions.map((question, i) =>
                         <Col key={i}>
                             <Question index={i + 1} description={question.question_description}
-                                      questionID={question.question_id} isAnswered={question.is_answered} history={this.props.history}/>
+                                      questionID={question.question_id} isAnswered={question.is_answered}
+                                      history={this.props.history}/>
                         </Col>
                     )}
                 </Row>

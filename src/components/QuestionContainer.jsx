@@ -1,7 +1,19 @@
 import React, { Component } from 'react';
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 
 class QuestionContainer extends Component {
+    state = {
+        isLoading: false
+    }
+
+    handleRefresh = () => {
+        this.setState({isLoading: true})
+        setTimeout(async () => {
+            await this.props.handleRefresh();
+            await this.setState({isLoading: false});
+        }, 800);
+    }
+
     render() {
         return (
             <div style={styles.container}>
@@ -10,7 +22,10 @@ class QuestionContainer extends Component {
                             onClick={this.props.handleExit}>{this.props.isQuestionsPage ? "Exit" : "Back"}</Button>
                     <h5 className={`pt-1`}>Session ID: <strong>{this.props.user_session}</strong></h5>
                     {this.props.isQuestionsPage ?
-                        <Button variant="success" style={styles.headerButton} onClick={this.props.handleRefresh}>Refresh</Button> : <div />}
+                        (<Button variant="success" style={styles.headerButton}
+                                 onClick={this.handleRefresh}>{this.state.isLoading ?
+                            <Spinner variant={"white"} className={"opacity-75"} size={"sm"} animation={"border"}/> :
+                            <span>Refresh</span>}</Button>) : <div/>}
                 </div>
                 {this.props.children}
             </div>
