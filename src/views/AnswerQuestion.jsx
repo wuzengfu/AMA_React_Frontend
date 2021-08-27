@@ -3,7 +3,7 @@ import QuestionContainer from "../components/QuestionContainer";
 import axios from "axios";
 import baseURL from '../config/baseURL';
 import styles from '../stylesheets/answerQuestion.module.css';
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Spinner } from "react-bootstrap";
 
 class AnswerQuestion extends Component {
     state = {
@@ -13,6 +13,7 @@ class AnswerQuestion extends Component {
         question: '',
         answer: '',
         question_id: '',
+        isLoading: false
     }
 
     componentDidMount() {
@@ -37,14 +38,21 @@ class AnswerQuestion extends Component {
     }
 
     handleSubmit = () => {
+        this.setState({isLoading: true});
         const {answer, user_session, owner_session, question_id} = this.state;
 
-        axios.post(`${baseURL}/question/postAnswer`, {
-            answer, user_session, owner_session, question_id
-        }).then(result => {
-            alert(result.data);
-            this.handleGoBack();
-        }).catch(err => alert(err.response.data));
+        setTimeout(() => {
+            axios.post(`${baseURL}/question/postAnswer`, {
+                answer, user_session, owner_session, question_id
+            }).then(async result => {
+                await alert(result.data);
+                await this.setState({isLoading: false});
+                this.handleGoBack();
+            }).catch(async err => {
+                await alert(err.response.data);
+                await this.setState({isLoading: false});
+            });
+        }, 800);
     }
 
     render() {
@@ -65,7 +73,11 @@ class AnswerQuestion extends Component {
                     <Form.Control as={"textarea"} row={7} className={"bg-light"}
                                   onChange={e => this.handleInputChange("answer", e.target.value)}/>
                     <div className={"d-flex justify-content-end mt-2"}>
-                        <Button variant={"success"} onClick={this.handleSubmit}>Submit</Button>
+                        <Button variant={"success"} onClick={this.handleSubmit}>
+                            {this.state.isLoading ?
+                                <Spinner animation={"border"} variant={"white"} size={"sm"} className={"opacity-75"}/> :
+                                <span>Submit</span>}
+                        </Button>
                     </div>
                 </div>
             </QuestionContainer>

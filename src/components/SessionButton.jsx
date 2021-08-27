@@ -7,6 +7,15 @@ class SessionButton extends React.Component {
         isLoading: false
     }
 
+    handleOnClick = () => {
+        this.setState({isLoading: true});
+
+        setTimeout(async () => {
+            await this.props.onClick();
+            await this.setState({isLoading: false});
+        }, 800);
+    }
+
     render() {
         return (
             <Button
@@ -17,15 +26,7 @@ class SessionButton extends React.Component {
                     ...this.props.style,
                     backgroundColor: this.props.backgroundColor
                 }}
-                onClick={() => {
-                    this.setState({isLoading: true});
-
-                    setTimeout(async () => {
-                        await this.props.onClick();
-                        await this.setState({isLoading: false});
-                    }, 800);
-
-                }}
+                onClick={this.handleOnClick}
             >
                 {this.state.isLoading ? <Spinner animation={"border"} size={"sm"} variant={"dark"}/> :
                     <span>{this.props.title}</span>}

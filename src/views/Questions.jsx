@@ -42,10 +42,9 @@ class Questions extends Component {
                 question: question_description
             }).then(result => {
                 alert(result.data);
-            }).then(() => {
                 this.fetchAllQuestions();
-                this.setState({question_description: "", isLoading: false});
-            }).catch(err => alert(err.response.data));
+            }).catch(err => alert(err.response.data))
+                .finally(() => this.setState({question_description: "", isLoading: false}));
         }, 800);
 
     }
