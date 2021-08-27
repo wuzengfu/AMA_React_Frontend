@@ -24,7 +24,7 @@ class Question extends Component {
                     </Card.Text>
                     <div className={"d-flex justify-content-end"}>
                         <Link to={`/questions/detail/${this.props.questionID}`} />
-                        {window.localStorage.getItem("owner_session") ? <Button variant={this.props.isAnswered ? "danger":"outline-danger"} size={"sm"} onClick={this.handleAnswerButton}>Answer</Button> :
+                        {window.localStorage.getItem("owner_session") ? <Button variant={this.props.isAnswered ? "danger":"outline-danger"} size={"sm"} onClick={this.handleAnswerButton} disabled={this.props.isAnswered}>Answer</Button> :
                             <Button variant={this.props.isAnswered ? "danger":"outline-danger"} size={"sm"} onClick={this.handleViewButton}>View</Button>}
                     </div>
                 </Card.Body>
