@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 import SessionButton from "../components/SessionButton";
 import SessionInput from "../components/SessionInput";
 import styles from "../stylesheets/sessionManager.module.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from 'axios';
 import baseURL from "../config/baseURL";
 
@@ -55,7 +55,7 @@ class SessionManager extends Component {
         }).then(() => {
             window.localStorage.setItem("user_session", user_session);
             window.localStorage.setItem("owner_session", owner_session);
-            window.location.href = "/questions";
+            this.props.history.push("/questions");
         })
             .catch(err => alert(err.response.data));
     }

@@ -20,15 +20,8 @@ class Questions extends Component {
 
     componentDidMount() {
         const user_session = window.localStorage.getItem("user_session");
-        // this.setState({user_session}, () => {
-        //     this.timer = setInterval(this.fetchAllQuestions, 500);
-        // });
 
         this.setState({user_session}, this.fetchAllQuestions);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.timer);
     }
 
     fetchAllQuestions = () => {
@@ -44,7 +37,7 @@ class Questions extends Component {
             user_session: user_session,
             question: question_description
         }).then((result) => {
-            this.setState({question_description: ""})
+            this.setState({question_description: ""});
             this.fetchAllQuestions();
             alert(result.data);
         }).catch(err => alert(err.response.data));
@@ -56,7 +49,7 @@ class Questions extends Component {
     }
 
     handleExit = () => {
-        window.location.href = "/";
+        this.props.history.push("/");
         window.localStorage.clear();
     }
 
@@ -89,7 +82,7 @@ class Questions extends Component {
                     {this.state.questions.map((question, i) =>
                         <Col key={i}>
                             <Question index={i + 1} description={question.question_description}
-                                      questionID={question.question_id} isAnswered={question.is_answered}/>
+                                      questionID={question.question_id} isAnswered={question.is_answered} history={this.props.history}/>
                         </Col>
                     )}
                 </Row>

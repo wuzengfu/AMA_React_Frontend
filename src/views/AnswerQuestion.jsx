@@ -36,7 +36,7 @@ class AnswerQuestion extends Component {
         this.setState({[inputName]: value});
     }
 
-    handleSubmit = (fetchAllQuestions) => {
+    handleSubmit = () => {
         const {answer, user_session, owner_session, question_id} = this.state;
 
         axios.post(`${baseURL}/question/postAnswer`, {
@@ -44,7 +44,6 @@ class AnswerQuestion extends Component {
         }).then(result => {
             alert(result.data);
             this.handleGoBack();
-            fetchAllQuestions();
         }).catch(err => alert(err.response.data));
     }
 

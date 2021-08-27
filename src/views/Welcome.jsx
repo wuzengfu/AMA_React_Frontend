@@ -18,7 +18,7 @@ class Welcome extends Component {
         axios.get(`${baseURL}/session/status?user_session=${user_session}`)
             .then(result => {
                 window.localStorage.setItem("user_session", user_session);
-                window.location.href = "/questions";
+                this.props.history.push("/questions");
             }).catch(err => alert(err.response.data));
     }
 

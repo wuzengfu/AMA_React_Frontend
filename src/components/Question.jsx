@@ -6,11 +6,11 @@ import {Link} from 'react-router-dom';
 class Question extends Component {
 
     handleViewButton = () => {
-        window.location.href = `/questions/detail/${this.props.questionID}`;
+        this.props.history.push(`/questions/detail/${this.props.questionID}`);
     }
 
     handleAnswerButton = () => {
-        window.location.href = `/questions/detail/${this.props.questionID}`;
+        this.props.history.push(`/questions/detail/${this.props.questionID}`);
     }
 
 
