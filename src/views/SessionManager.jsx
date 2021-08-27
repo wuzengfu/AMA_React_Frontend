@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 import SessionButton from "../components/SessionButton";
 import SessionInput from "../components/SessionInput";
 import styles from "../stylesheets/sessionManager.module.css";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import baseURL from "../config/baseURL";
 
