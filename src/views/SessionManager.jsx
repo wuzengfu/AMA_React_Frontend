@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Container from "../components/Container";
+import SessionContainer from "../components/SessionContainer";
 import { Form } from 'react-bootstrap';
 import SessionButton from "../components/SessionButton";
 import SessionInput from "../components/SessionInput";
@@ -62,7 +62,7 @@ class SessionManager extends Component {
 
     render() {
         return (
-            <Container>
+            <SessionContainer>
                 <div className={`d-flex align-content-around`}>
                     <div className={styles.leftContainer}>
                         <div>
@@ -93,7 +93,7 @@ class SessionManager extends Component {
                 <div className="text-center mb-3">
                     <Link to="/" style={{color: "#EEEEEE"}}>no... I'm just an attendee 😂</Link>
                 </div>
-            </Container>
+            </SessionContainer>
         );
     }
 }

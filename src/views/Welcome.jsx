@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Container from "../components/Container";
+import SessionContainer from "../components/SessionContainer";
 import { Form } from "react-bootstrap";
 import { FcManager } from "react-icons/all";
 import SessionButton from "../components/SessionButton";
@@ -28,7 +28,7 @@ class Welcome extends Component {
 
     render() {
         return (
-            <Container>
+            <SessionContainer>
                 <div className="text-center" style={styles.container}>
                     <h5 className="text-white mt-4 mb-4 fw-bold">Welcome to Ask Me Anything 🎉</h5>
                     <div className="w-75 m-auto">
@@ -46,7 +46,7 @@ class Welcome extends Component {
                         <Link to="/session" className="d-block text-white mb-2 mt-1">I am an owner <FcManager/></Link>
                     </div>
                 </div>
-            </Container>
+            </SessionContainer>
         );
     }
 }

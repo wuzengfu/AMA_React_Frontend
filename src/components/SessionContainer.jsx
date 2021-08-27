@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Container extends Component {
+class SessionContainer extends Component {
     render() {
         return (
             <div className="d-flex align-items-center justify-content-center vh-100" style={rootStyles}>
@@ -12,7 +12,7 @@ class Container extends Component {
     }
 }
 
-export default Container;
+export default SessionContainer;
 
 const rootStyles = {
     backgroundColor: "rgb(247, 248, 245)"
