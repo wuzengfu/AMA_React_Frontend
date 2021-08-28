@@ -1,2 +1,2 @@
-const baseURL = "https://ama-react-backend.herokuapp.com";
+const baseURL = "https://ama-wuzengfu.herokuapp.com";
 module.exports = baseURL;
